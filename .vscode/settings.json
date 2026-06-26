@@ -1,0 +1,42 @@
+{
+    "sqltools.connections": [
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "askForPassword": true,
+            "sshOptions": {
+                "port": 22,
+                "host": "postgresql",
+                "username": "postgres",
+                "password": "8285"
+            },
+            "driver": "PostgreSQL",
+            "name": "postgresql",
+            "database": "essaie",
+            "username": "postgres"
+        },
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "name": "postgresql",
+            "database": "hr",
+            "username": "postgres"
+        },
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "postgresql",
+            "database": "ressources",
+            "username": "postgres"
+        }
+    ]
+}
