@@ -1,7 +1,3 @@
-git config global user.name "rehani-djuma"
-
-git config global user.email "rehanimayundo@gmail.com"
-
 
 -----====analyse de la ressources humaine
 
