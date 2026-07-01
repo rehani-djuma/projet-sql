@@ -1,4 +1,4 @@
-﻿id_paiement,id_vente,méthode,statut
+id_paiement,id_vente,méthode,statut
 1,1,Carte,Success
 2,2,Mobile Money,Success
 3,3,PayPal,Success
@@ -14999,4 +14999,3 @@
 14998,14998,PayPal,Success
 14999,14999,Mobile Money,Failed
 15000,15000,Carte,Failed
-Success,,,

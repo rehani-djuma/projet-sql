@@ -194,4 +194,44 @@ ORDER BY performance_moyenne DESC;
 ======--Analyse si les départements avec un turnover élevé ont aussi une performance 
 --moyenne plus faible. 
 
+======================================================================================
+------Comparaison Cohorte / Seniorité 
+---------On combine cohorte et ancienneté pour détecter des patterns métier. 
 
+SELECT niveau_seniorite, 
+COUNT(*) AS nb_employes, 
+ROUND(AVG(p.score),2) AS perf_moyenne, 
+ROUND(SUM(CASE WHEN ETAT='DEMISSIONNER' THEN 1 ELSE 0 
+END)*100.0/COUNT(*),2) AS turnover_pct 
+FROM employes e 
+JOIN performances p ON e.id_employe = p.id_employe 
+GROUP BY niveau_seniorite
+ORDER BY turnover_pct DESC;
+
+====================================================================================
+----------Détecter les “Cohortes à risque” 
+----On peut combiner turnover et performance dans un tableau analytique : 
+
+SELECT EXTRACT(YEAR FROM e.date_embauche) AS annee_embauche, 
+ROUND(AVG(p.score),2) AS perf_moyenne, 
+ROUND(SUM(CASE WHEN e.ETAT='DEMISSIONNER' THEN 1 ELSE 0 
+END)*100.0/COUNT(*),2) AS turnover_pct 
+FROM employes e 
+JOIN performances p ON e.id_employe = p.id_employe 
+GROUP BY annee_embauche 
+ORDER BY turnover_pct DESC; 
+--Les années avec turnover élevé + performance basse sont des signaux critiques 
+--pour le management.
+
+===============================================================================
+SELECT EXTRACT(YEAR FROM e.date_embauche) AS annee_embauche, 
+d.nom_departement, 
+ROUND(AVG(p.score),2) AS perf_moyenne, 
+ROUND(SUM(CASE WHEN e.ETAT='DEMISSIONNER' THEN 1 ELSE 0 
+END)*100.0/COUNT(*),2) AS turnover_pct, 
+COUNT(*) AS nb_employes 
+FROM employes e 
+JOIN departements d ON e.id_employe = d.id_departement 
+JOIN performances p ON e.id_employe = p.id_employe 
+GROUP BY annee_embauche, d.nom_departement 
+ORDER BY turnover_pct DESC;
